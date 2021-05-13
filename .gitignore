@@ -58,3 +58,8 @@ sysinfo.txt
 # Crashlytics generated file
 crashlytics-build.properties
 
+.idea/
+
+# WorldSim Engine is retrieve from a script, so don't put it in this repository
+/[Aa]ssets/WorldSim/
+/[Aa]ssets/WorldSim.meta
