@@ -380,7 +380,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f2683a3f4697344a8a64222c15d10761, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  FileName: /Users/yann/dev/WorldSim Integration/Assets/Fixtures/simple01.yaml
+  FileName: Assets/Fixtures/simple01.yaml
   TypeDisplay: {fileID: 161960793}
 --- !u!4 &1622620584
 Transform:
