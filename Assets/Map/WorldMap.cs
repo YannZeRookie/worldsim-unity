@@ -10,6 +10,8 @@ public class WorldMap : MonoBehaviour
     [SerializeField]
     CellDisplayer CellDisplayerPrefab;
 
+    public UIManager UIManager;
+
     IWorld World;
     // Start is called before the first frame update
 
@@ -21,6 +23,7 @@ public class WorldMap : MonoBehaviour
         World = GetComponent<BootWorldSim>().World;
         TileConverter = GetComponent<CellConverter>();
         Tilemap = GetComponentInChildren<Tilemap>();
+        UIManager = FindObjectOfType<UIManager>();
 
         foreach(ICell cell in World.Map.Cells)
         {
