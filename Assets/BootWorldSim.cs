@@ -12,19 +12,15 @@ public class BootWorldSim : MonoBehaviour
 
     [SerializeField] private Text TypeDisplay;
     // Awake is called before everything else
+    public IWorld World { get; private set; }
+
     private void Awake()
     {
         Engine engine = new Engine();
         engine.LoadYaml(FileName);
-        IWorld world = engine.World;
-        string type = world.Type;
+        World = engine.World;
+        string type = World.Type;
 
         TypeDisplay.text = type;
-    }
-    
-    // Update is called once per frame
-    void Update()
-    {
-        
     }
 }
