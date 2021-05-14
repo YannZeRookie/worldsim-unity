@@ -4,8 +4,9 @@
 
 cd "$(dirname "$0")"
 
+# Change this to your needs
 ENGINE=../../worldsim-engine/engine
 TARGET=../Assets/WorldSim
 
 mkdir -p $TARGET
-cp -a -v $ENGINE/*.cs $TARGET/
+cp -a -u -v $ENGINE/*.cs $TARGET/
