@@ -7,15 +7,15 @@ using WorldSim.API;
 public class CellConverter : MonoBehaviour
 {
     [SerializeField]
-    Sprite Factory;
+    CellDisplayer Factory;
 
     [SerializeField]
-    Sprite Source;
+    CellDisplayer Source;
     
     [SerializeField]
-    Sprite Sink;
+    CellDisplayer Sink;
 
-    public Sprite CellToSprite(ICell cell)
+    public CellDisplayer CellToDisplayer(ICell cell)
     {
         switch(cell.Jm2.Id)
         {

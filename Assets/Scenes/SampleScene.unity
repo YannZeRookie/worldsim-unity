@@ -861,7 +861,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1261a93c683278245971fa96ac68f9ff, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  CellDisplayerPrefab: {fileID: -8706032342878607968, guid: 5215e95b8f328934ea9b227b6e09fa83, type: 3}
   UIManager: {fileID: 0}
 --- !u!114 &1622620586
 MonoBehaviour:
@@ -875,9 +874,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 052b3d9908ec26346a468f680323ea2f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Factory: {fileID: -5177388603050735206, guid: 70c9f575e7af8ee47841e8d8c5b1a0ad, type: 3}
-  Source: {fileID: -5177388603050735206, guid: baffa0ad7ed0f8a4ea9dcf1b51ea2eb2, type: 3}
-  Sink: {fileID: -5177388603050735206, guid: c076cd0bdfd50e14daf5bbb2d5699a94, type: 3}
+  Factory: {fileID: 7401034705412854607, guid: 0071119cb646f2a40bca67d57a9b3803, type: 3}
+  Source: {fileID: 4162605191413686774, guid: b0eba876ef82e0745a58c41bcbccf84c, type: 3}
+  Sink: {fileID: 3695571696202800619, guid: 12a1fbc421758e24ab2c51a86ae27239, type: 3}
 --- !u!1 &1868175779
 GameObject:
   m_ObjectHideFlags: 0

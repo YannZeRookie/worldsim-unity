@@ -11,6 +11,6 @@ public class JM2Displayer : MonoBehaviour
 
     public void SetJM2(IJM2 JM2)
     {
-        ID.text = "ID: " + JM2.Id;
+        ID.text = "ID: " + ((JM2 != null)? JM2.Id : "");
     }
 }

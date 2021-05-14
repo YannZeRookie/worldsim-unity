@@ -1,10 +1,10 @@
 fileFormatVersion: 2
-guid: c076cd0bdfd50e14daf5bbb2d5699a94
+guid: baffa0ad7ed0f8a4ea9dcf1b51ea2eb2
 TextureImporter:
   internalIDToNameTable:
   - first:
       213: -5177388603050735206
-    second: Sink
+    second: Cell
   externalObjects: {}
   serializedVersion: 11
   mipmaps:
@@ -118,7 +118,7 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: Sink
+      name: Cell
       rect:
         serializedVersion: 2
         x: 0
