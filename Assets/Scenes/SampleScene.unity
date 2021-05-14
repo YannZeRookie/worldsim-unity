@@ -588,9 +588,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 052b3d9908ec26346a468f680323ea2f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  FactoryTile: {fileID: 0}
-  SourceTile: {fileID: 0}
-  SinkTile: {fileID: 0}
+  FactoryTile: {fileID: 11400000, guid: c0a396c7446b01e44a52babec569ed33, type: 2}
+  SourceTile: {fileID: 11400000, guid: 9e12c1e7aa7604e4d935d4ce84815938, type: 2}
+  SinkTile: {fileID: 11400000, guid: d9eca697bf97f9b4dbccce89c13be1fc, type: 2}
 --- !u!1 &1868175779
 GameObject:
   m_ObjectHideFlags: 0
