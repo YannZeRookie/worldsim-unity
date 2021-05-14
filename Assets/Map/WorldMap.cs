@@ -7,23 +7,25 @@ using WorldSim.API;
 //Make the link between a Tilemap and an IWorld map
 public class WorldMap : MonoBehaviour
 {
+    [SerializeField]
+    CellDisplayer CellDisplayerPrefab;
+
     IWorld World;
     // Start is called before the first frame update
 
-    Tilemap Tilemap;
-    TileConverter TileConverter;
+    public Tilemap Tilemap { get; private set; }
+    public CellConverter TileConverter { get; private set; }
 
     void Start()
     {
         World = GetComponent<BootWorldSim>().World;
-        TileConverter = GetComponent<TileConverter>();
+        TileConverter = GetComponent<CellConverter>();
         Tilemap = GetComponentInChildren<Tilemap>();
 
         foreach(ICell cell in World.Map.Cells)
         {
-            Tile tile = TileConverter.CellToTile(cell);
-
-            Tilemap.SetTile(new Vector3Int(cell.X, cell.Y, 0), tile);
+            CellDisplayer CDisplayer = Instantiate(CellDisplayerPrefab, transform);
+            CDisplayer.Initialize(this, cell);
         }
     }
 }

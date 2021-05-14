@@ -4,7 +4,7 @@ TextureImporter:
   internalIDToNameTable:
   - first:
       213: -5177388603050735206
-    second: 9-Sliced
+    second: Sink
   externalObjects: {}
   serializedVersion: 11
   mipmaps:
@@ -118,7 +118,7 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: 9-Sliced
+      name: Sink
       rect:
         serializedVersion: 2
         x: 0

@@ -1,10 +1,10 @@
 fileFormatVersion: 2
-guid: 70c9f575e7af8ee47841e8d8c5b1a0ad
+guid: baffa0ad7ed0f8a4ea9dcf1b51ea2eb2
 TextureImporter:
   internalIDToNameTable:
   - first:
       213: -5177388603050735206
-    second: 9-Sliced
+    second: Source
   externalObjects: {}
   serializedVersion: 11
   mipmaps:
@@ -118,7 +118,7 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: 9-Sliced
+      name: Source
       rect:
         serializedVersion: 2
         x: 0

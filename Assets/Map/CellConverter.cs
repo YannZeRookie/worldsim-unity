@@ -4,27 +4,27 @@ using UnityEngine;
 using UnityEngine.Tilemaps;
 using WorldSim.API;
 
-public class TileConverter : MonoBehaviour
+public class CellConverter : MonoBehaviour
 {
     [SerializeField]
-    Tile FactoryTile;
+    Sprite Factory;
 
     [SerializeField]
-    Tile SourceTile;
+    Sprite Source;
     
     [SerializeField]
-    Tile SinkTile;
+    Sprite Sink;
 
-    public Tile CellToTile(ICell cell)
+    public Sprite CellToSprite(ICell cell)
     {
         switch(cell.Jm2.Id)
         {
             case "factory":
-                return FactoryTile;
+                return Factory;
             case "source":
-                return SourceTile;
+                return Source;
             case "sink":
-                return SinkTile;
+                return Sink;
             default:
                 throw new System.Exception("Unknown ID: " + cell.Jm2.Id);
         }
