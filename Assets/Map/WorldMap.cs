@@ -22,6 +22,8 @@ public class WorldMap : MonoBehaviour
         Tilemap = GetComponentInChildren<Tilemap>();
         UIManager = FindObjectOfType<UIManager>();
 
+        UIManager.Initialize(World);
+
         foreach(ICell cell in World.Map.Cells)
         {
             CellDisplayer CellDisplayerPrefab = CellConverter.CellToDisplayer(cell);

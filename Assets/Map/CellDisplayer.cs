@@ -7,6 +7,9 @@ using WorldSim.API;
 public class CellDisplayer : MonoBehaviour
 {
     [SerializeField]
+    SpriteRenderer Ground;
+
+    [SerializeField]
     public string ID;
 
     Tilemap Tilemap;
@@ -22,15 +25,25 @@ public class CellDisplayer : MonoBehaviour
         //Position
         Vector3Int gridPostition = new Vector3Int(Cell.X, Cell.Y, 0);
         transform.position = Tilemap.CellToWorld(gridPostition);
+
+        UpdateDisplay();
+    }
+
+    void UpdateDisplay()
+    {
+        if (Cell.Jm2.Efficiency.HasValue)
+            Ground.color = Color.Lerp(Color.red, Color.clear, Cell.Jm2.Efficiency.Value);
+        else
+            Ground.color = Color.clear;
     }
 
     private void OnMouseEnter()
     {
-        UIManager.JM2Displayer.SetJM2(Cell.Jm2);
+        UIManager.CellInfosDisplayer.SetCell(Cell);
     }
 
     private void OnMouseExit()
     {
-        UIManager.JM2Displayer.SetJM2(null);
+        UIManager.CellInfosDisplayer.SetCell(null);
     }
 }
