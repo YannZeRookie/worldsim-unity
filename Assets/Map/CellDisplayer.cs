@@ -6,6 +6,9 @@ using WorldSim.API;
 
 public class CellDisplayer : MonoBehaviour
 {
+    [SerializeField]
+    public string ID;
+
     Tilemap Tilemap;
     ICell Cell;
     UIManager UIManager;
