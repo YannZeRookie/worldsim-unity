@@ -15,6 +15,8 @@ public class WorldMap : MonoBehaviour
     public Tilemap Tilemap { get; private set; }
     public CellConverter CellConverter { get; private set; }
 
+    readonly List<CellDisplayer> cellDisplayers = new List<CellDisplayer>();
+
     void Start()
     {
         World = GetComponent<BootWorldSim>().World;
@@ -22,13 +24,20 @@ public class WorldMap : MonoBehaviour
         Tilemap = GetComponentInChildren<Tilemap>();
         UIManager = FindObjectOfType<UIManager>();
 
-        UIManager.Initialize(World);
+        UIManager.Initialize(this, World);
 
         foreach(ICell cell in World.Map.Cells)
         {
             CellDisplayer CellDisplayerPrefab = CellConverter.CellToDisplayer(cell);
-            CellDisplayer CDisplayer = Instantiate(CellDisplayerPrefab, transform);
-            CDisplayer.Initialize(this, cell);
+            CellDisplayer CellDisplayer = Instantiate(CellDisplayerPrefab, transform);
+            CellDisplayer.Initialize(this, cell);
+            cellDisplayers.Add(CellDisplayer);
         }
+    }
+
+    public void UpdateDisplay()
+    {
+        foreach (CellDisplayer cell in cellDisplayers)
+            cell.UpdateDisplay();
     }
 }

@@ -29,7 +29,7 @@ public class CellDisplayer : MonoBehaviour
         UpdateDisplay();
     }
 
-    void UpdateDisplay()
+    public void UpdateDisplay()
     {
         if (Cell.Jm2.Efficiency.HasValue)
             Ground.color = Color.Lerp(Color.red, Color.clear, Cell.Jm2.Efficiency.Value);

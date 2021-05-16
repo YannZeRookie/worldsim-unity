@@ -31,7 +31,7 @@ public class CellInfosDisplayer : MonoBehaviour
             if (cell.Jm2.Efficiency.HasValue)
                 Efficiency.text += (cell.Jm2.Efficiency.Value * 100) + "%";
             else
-                Efficiency.text = "N/A";
+                Efficiency.text += "N/A";
         }
     }
 }
