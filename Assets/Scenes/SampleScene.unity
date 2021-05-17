@@ -1166,7 +1166,6 @@ GameObject:
   m_Component:
   - component: {fileID: 966902517}
   - component: {fileID: 966902518}
-  - component: {fileID: 966902519}
   - component: {fileID: 966902520}
   m_Layer: 5
   m_Name: CellInfosDisplayer
@@ -1215,19 +1214,6 @@ MonoBehaviour:
   DefaultAttributePrefab: {fileID: 2523773969435237499, guid: 50ee73365551ad04f827d07e0d619599, type: 3}
   Type: {fileID: 1061960085}
   Efficiency: {fileID: 631011017}
---- !u!114 &966902519
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 966902516}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 79544db103ec0d7479308fb76cbb24fa, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  ResourceDisplayerPrefab: {fileID: -4923102826603761186, guid: 7bbe8fa51582d3540b8ef331071b37de, type: 3}
 --- !u!114 &966902520
 MonoBehaviour:
   m_ObjectHideFlags: 0

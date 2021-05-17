@@ -35,7 +35,7 @@ public class TimeSlider : MonoBehaviour
                 break;
         }
 
-
+        Slider.value = Time.Iteration;
         UpdateDate();
     }
 
