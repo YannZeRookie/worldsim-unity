@@ -37,6 +37,7 @@ public class WorldMap : MonoBehaviour
 
     public void UpdateDisplay()
     {
+        UIManager.UpdateDisplay();
         foreach (CellDisplayer cell in cellDisplayers)
             cell.UpdateDisplay();
     }

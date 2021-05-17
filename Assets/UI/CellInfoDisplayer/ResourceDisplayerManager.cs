@@ -16,7 +16,7 @@ public class ResourceDisplayerManager : MonoBehaviour
         ResourceDisplayer ResourceDisplayer = Instantiate(ResourceDisplayerPrefab, transform);
         ResourceDisplayers.Add(ResourceDisplayer);
 
-        Vector3 position = GetComponent<CellInfosDisplayerPositionner>().GetPosition(false);
+        Vector3 position = GetComponent<DisplayerPositionner>().GetPosition(false);
         ResourceDisplayer.Initialize(resource, position);
     }
 
