@@ -35,7 +35,7 @@ public class TimeSlider : MonoBehaviour
                 break;
         }
 
-        Slider.SetValueWithoutNotify(Time.StepValue);
+
         UpdateDate();
     }
 
