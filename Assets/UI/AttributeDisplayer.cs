@@ -11,6 +11,7 @@ public class AttributeDisplayer : MonoBehaviour
     Text DefaultAttributePrefab;
 
     protected readonly List<Text> Attributes = new List<Text>();
+    protected readonly List<Text> PermanentAttributes = new List<Text>();
 
     protected DisplayerPositionner Positionner;
 
@@ -24,7 +25,7 @@ public class AttributeDisplayer : MonoBehaviour
         if (Attribute is List<object> list)
         {
             if (title != null)
-                CreateAttribute(title + ":", indent);
+                CreateAttribute("", indent, title);
             DisplayAttributeContent(list.First(), indent + 1);
             foreach (object obj in list.Skip(1))
             {
@@ -38,27 +39,37 @@ public class AttributeDisplayer : MonoBehaviour
                 DisplayAttributeContent(pair.Value, indent + 1, title = (string)pair.Key);
 
         else if (Attribute is string str)
-        {
-            if (title != null)
-                CreateAttribute(title + ": " + str, indent);
-            else
-                CreateAttribute(str, indent);
-        }
+            CreateAttribute(str, indent, title);
         else
             Debug.LogError("Unknown type : " + Attribute.GetType());
     }
 
-    protected void CreateAttribute(string text, int indent = 0)
+    protected Text CreateAttribute(string text, int indent = 0, string title = null, bool permanent = false)
     {
         Text DefaultAttribute = Instantiate(DefaultAttributePrefab, transform);
 
-        Vector3 position = Positionner.GetPosition();
+        Vector3 position = Positionner.GetPosition(RollBackEnabled: !permanent);
         DefaultAttribute.rectTransform.localPosition = position;
-        DefaultAttribute.text = new string('\t', indent) + text;
 
-        Attributes.Add(DefaultAttribute);
+        SetText(DefaultAttribute, text, indent, title);
+
+        if (permanent)
+            PermanentAttributes.Add(DefaultAttribute);
+        else
+            Attributes.Add(DefaultAttribute);
+
+        return DefaultAttribute;
     }
 
+    protected void SetText(Text Attribute, string text, int indent = 0, string title = null)
+    {
+        Attribute.text = new string('\t', indent);
+
+        if (title != null)
+            Attribute.text += title + ": ";
+
+        Attribute.text += text;
+    }
     protected void ResetAttributes()
     {
         foreach (Text text in Attributes)

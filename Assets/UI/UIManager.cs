@@ -11,9 +11,7 @@ public class UIManager : MonoBehaviour
 
     public void Initialize(WorldMap worldMap, IWorld world)
     {
-        foreach (IResource resource in world.Resources.Values)
-            CellInfosDisplayer.ResourceDisplayerManager.CreateNewResource(resource);
-
+        CellInfosDisplayer.Initialize(world);
         KPIDisplayer.Initialize(world);
         TimeSlider.Initialize(worldMap, world);
     }
