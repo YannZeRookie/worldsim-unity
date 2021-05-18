@@ -3,6 +3,7 @@ using System.Linq;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using WorldSim.API;
 
 [RequireComponent(typeof(DisplayerPositionner))]
 public class AttributeDisplayer : MonoBehaviour
@@ -20,28 +21,32 @@ public class AttributeDisplayer : MonoBehaviour
         Positionner = GetComponent<DisplayerPositionner>();
     }
 
-    protected void DisplayAttributeContent(object Attribute, int indent = 0, string title = null)
+    protected void DisplayAttributeContent(IDataNode dataNode, int indent = 0, string title = null)
     {
-        if (Attribute is List<object> list)
+        if (dataNode is DataList list)
         {
             if (title != null)
                 CreateAttribute("", indent, title);
             DisplayAttributeContent(list.First(), indent + 1);
-            foreach (object obj in list.Skip(1))
+            foreach (IDataNode obj in list.Skip(1))
             {
                 Positionner.GetPosition();
                 DisplayAttributeContent(obj, indent + 1);
             }
         }
 
-        else if (Attribute is Dictionary<object, object> dictionnary)
-            foreach (KeyValuePair<object, object> pair in dictionnary)
-                DisplayAttributeContent(pair.Value, indent + 1, title = (string)pair.Key);
+        else if (dataNode is DataDictionary dictionary)
+        {
+            if (title != null)
+                CreateAttribute("", indent, title);
+            foreach (var pair in dictionary)
+                DisplayAttributeContent(pair.Value, indent + 1, title = pair.Key);
+        }
 
-        else if (Attribute is string str)
-            CreateAttribute(str, indent, title);
+        else if (dataNode is DataValue value)
+            CreateAttribute(value.StringValue(), indent, title);
         else
-            Debug.LogError("Unknown type : " + Attribute.GetType());
+            Debug.LogError("Unknown type : " + dataNode.GetType());
     }
 
     protected Text CreateAttribute(string text, int indent = 0, string title = null, bool permanent = false)

@@ -29,7 +29,7 @@ public class CellInfosDisplayer : AttributeDisplayer
             else
                 SetText(Efficiency, "N/A", title: "Efficiency");
 
-            foreach (KeyValuePair<IResource, Text> pair in Resources)
+            foreach (var pair in Resources)
                 SetText(pair.Value, cell.GetStock(pair.Key.Id).ToString(), title: pair.Key.Name);
 
             DisplayJM2SpecificInfos(cell.Jm2);
@@ -39,7 +39,7 @@ public class CellInfosDisplayer : AttributeDisplayer
             SetText(Type, "", title: "Type");
             SetText(Efficiency, "", title: "Efficiency");
 
-            foreach (KeyValuePair<IResource, Text> pair in Resources)
+            foreach (var pair in Resources)
                 SetText(pair.Value, "", title: pair.Key.Name);
 
             ResetAttributes();
@@ -51,7 +51,7 @@ public class CellInfosDisplayer : AttributeDisplayer
         ResetAttributes();
         Positionner.RestartPosition();
 
-        foreach(KeyValuePair<string, object> pair in jM2.Init)
+        foreach(var pair in jM2.Init)
             DisplayAttributeContent(pair.Value, title: pair.Key);
     }
 }

@@ -22,6 +22,6 @@ public class KPIDisplayer : AttributeDisplayer
         ResetAttributes();
         Positionner.RestartPosition();
         foreach (KeyValuePair<IKpi, Text> pair in Kpis)
-            SetText(pair.Value, pair.Key.GetValue(World).ToString(), title: pair.Key.Name);
+            SetText(pair.Value, pair.Key.GetValue().ToString(), title: pair.Key.Name);
     }
 }
