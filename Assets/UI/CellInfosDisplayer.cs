@@ -51,7 +51,39 @@ public class CellInfosDisplayer : AttributeDisplayer
         ResetAttributes();
         Positionner.RestartPosition();
 
-        foreach(var pair in jM2.Init)
-            DisplayAttributeContent(pair.Value, title: pair.Key);
+        var tags = new HashSet<string>();
+
+        foreach (var pair in jM2.Values)
+            tags.Add(pair.Key);
+
+        //Rich man's display
+        ConsumeTags(tags, jM2.Values);
+
+        //Poor man's display
+        foreach (string key in tags)
+            DisplayAttributeContent(jM2.Values[key], title: key);
+    }
+
+    private void ConsumeTags(HashSet<string> tags, DataDictionary values)
+    {
+        TryConsumeOpexOutput(tags, values);
+    }
+
+    private void TryConsumeOpexOutput(HashSet<string> tags, DataDictionary values)
+    {
+        if (!tags.Contains("output") || !tags.Contains("opex"))
+            return;
+
+        tags.Remove("output");
+        tags.Remove("opex");
+
+        var output = values["output"];
+        var opex = values["opex"];
+
+        CreateAttribute("", title: "Production");
+        DisplayAttributeContent(opex);
+
+        CreateAttribute("===>", indent: 2);
+        DisplayAttributeContent(output);
     }
 }
