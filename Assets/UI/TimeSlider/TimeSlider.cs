@@ -9,7 +9,6 @@ public class TimeSlider : MonoBehaviour
 {
     Slider Slider;
     ITime Time;
-    IWorld World;
     WorldMap WorldMap;
 
     private void Awake()
@@ -22,21 +21,8 @@ public class TimeSlider : MonoBehaviour
         Time = world.Time;
         WorldMap = worldMap;
 
-        switch (Time.StepUnit)
-        {
-            case TimeStep.day:
-                Slider.maxValue = (Time.End - Time.Start).Days -1;
-                break;
-            case TimeStep.month:
-                Slider.maxValue = 12 * (Time.End.Year - Time.Start.Year) + Time.End.Month - Time.Start.Month -1;
-                break;
-            case TimeStep.year:
-                Slider.maxValue = Time.End.Year - Time.Start.Year -1;
-                break;
-        }
-
+        Slider.maxValue = Time.LastIteration();
         Slider.value = Time.Iteration;
-        UpdateDate();
     }
 
     public void UpdateDate()
