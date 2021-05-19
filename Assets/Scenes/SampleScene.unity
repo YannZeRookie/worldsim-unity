@@ -861,8 +861,8 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 692549881}
-  - component: {fileID: 692549882}
   - component: {fileID: 692549883}
+  - component: {fileID: 692549882}
   m_Layer: 5
   m_Name: KPIDisplayer
   m_TagString: Untagged
@@ -906,6 +906,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   StartPosition: {fileID: 447136790}
   Distance: 30
+  BlockDistance: 50
+  ColumnSize: 100
 --- !u!114 &692549883
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -918,7 +920,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: df3c936b357583442ab200426d60314d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  DefaultAttributePrefab: {fileID: 2523773969435237499, guid: 50ee73365551ad04f827d07e0d619599, type: 3}
+  AttributePrefab: {fileID: 2523773969435237499, guid: 50ee73365551ad04f827d07e0d619599, type: 3}
+  BlockAttributePrefab: {fileID: 6775185832552286846, guid: 4eaf97c6c1bacd242b572ed69d2116eb, type: 3}
 --- !u!1 &883570144
 GameObject:
   m_ObjectHideFlags: 0
@@ -1211,7 +1214,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1ea4998ead05b484ca7a7bcad0af1c4b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  DefaultAttributePrefab: {fileID: 2523773969435237499, guid: 50ee73365551ad04f827d07e0d619599, type: 3}
+  AttributePrefab: {fileID: 2523773969435237499, guid: 50ee73365551ad04f827d07e0d619599, type: 3}
+  BlockAttributePrefab: {fileID: 6775185832552286846, guid: 4eaf97c6c1bacd242b572ed69d2116eb, type: 3}
   Type: {fileID: 1061960085}
   Efficiency: {fileID: 631011017}
 --- !u!114 &966902520
@@ -1228,6 +1232,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   StartPosition: {fileID: 1592778833}
   Distance: 30
+  BlockDistance: 50
+  ColumnSize: 100
 --- !u!1 &1061960083
 GameObject:
   m_ObjectHideFlags: 0

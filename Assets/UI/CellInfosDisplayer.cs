@@ -77,13 +77,31 @@ public class CellInfosDisplayer : AttributeDisplayer
         tags.Remove("output");
         tags.Remove("opex");
 
-        var output = values["output"];
-        var opex = values["opex"];
+        var output = (DataDictionary)values["output"];
+        var opex = (DataDictionary)values["opex"];
 
         CreateAttribute("", title: "Production");
-        DisplayAttributeContent(opex);
+        {
+            var blocks = CreateBlocks(opex.Count);
 
-        CreateAttribute("===>", indent: 2);
-        DisplayAttributeContent(output);
+            int index = 0;
+            foreach (var pair in opex)
+            {
+                blocks[index++].text = pair.Key + "\n" + pair.Value.FloatValue();
+            }
+        }
+        
+
+        CreateBlocks(1)[0].text = "||\n\\/";
+
+        {
+            var blocks = CreateBlocks(output.Count);
+
+            int index = 0;
+            foreach (var pair in output)
+            {
+                blocks[index++].text = pair.Key + "\n" + pair.Value.FloatValue();
+            }
+        }
     }
 }

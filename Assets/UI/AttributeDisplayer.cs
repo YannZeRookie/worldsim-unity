@@ -9,7 +9,9 @@ using WorldSim.API;
 public class AttributeDisplayer : MonoBehaviour
 {
     [SerializeField]
-    Text DefaultAttributePrefab;
+    Text AttributePrefab;
+    [SerializeField]
+    Text BlockAttributePrefab;
 
     protected readonly List<Text> Attributes = new List<Text>();
     protected readonly List<Text> PermanentAttributes = new List<Text>();
@@ -30,7 +32,7 @@ public class AttributeDisplayer : MonoBehaviour
             DisplayAttributeContent(list.First(), indent + 1);
             foreach (IDataNode obj in list.Skip(1))
             {
-                Positionner.GetPosition();
+                Positionner.NextPosition();
                 DisplayAttributeContent(obj, indent + 1);
             }
         }
@@ -51,9 +53,9 @@ public class AttributeDisplayer : MonoBehaviour
 
     protected Text CreateAttribute(string text, int indent = 0, string title = null, bool permanent = false)
     {
-        Text DefaultAttribute = Instantiate(DefaultAttributePrefab, transform);
+        Text DefaultAttribute = Instantiate(AttributePrefab, transform);
 
-        Vector3 position = Positionner.GetPosition(RollBackEnabled: !permanent);
+        Vector3 position = Positionner.NextPosition(RollBackEnabled: !permanent);
         DefaultAttribute.rectTransform.localPosition = position;
 
         SetText(DefaultAttribute, text, indent, title);
@@ -64,6 +66,24 @@ public class AttributeDisplayer : MonoBehaviour
             Attributes.Add(DefaultAttribute);
 
         return DefaultAttribute;
+    }
+
+    protected List<Text> CreateBlocks(int number, bool permanent = false)
+    {
+        var blocks = new List<Text>();
+
+        foreach (Vector3 position in Positionner.CreateColumns(number, !permanent))
+        {
+            Text block = Instantiate(BlockAttributePrefab, transform);
+            block.rectTransform.localPosition = position;
+            blocks.Add(block);
+            if (permanent)
+                PermanentAttributes.Add(block);
+            else
+                Attributes.Add(block);
+        }
+
+        return blocks;
     }
 
     protected void SetText(Text Attribute, string text, int indent = 0, string title = null)

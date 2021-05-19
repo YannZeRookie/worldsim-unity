@@ -44,6 +44,6 @@ public class CellDisplayer : MonoBehaviour
 
     private void OnMouseExit()
     {
-        UIManager.CellInfosDisplayer.SetCell(null);
+        //UIManager.CellInfosDisplayer.SetCell(null);
     }
 }
