@@ -40,7 +40,7 @@ public class DisplayerPositionner : MonoBehaviour
         return position;
     }
 
-    public IEnumerable<Vector3> CreateColumns(int number, bool RollBackEnabled = true)
+    public List<Vector3> CreateColumns(int number, bool RollBackEnabled = true)
     {
         number += 1;
 

@@ -11,11 +11,13 @@ public class AttributeDisplayer : MonoBehaviour
     [SerializeField]
     Text AttributePrefab;
     [SerializeField]
-    Text BlockAttributePrefab;
+    BlockAttribute BlockAttributePrefab;
+    [SerializeField]
+    ResourceSpriteLister ResourceList;
 
-    protected readonly List<Text> Attributes = new List<Text>();
-    protected readonly List<Text> PermanentAttributes = new List<Text>();
-
+    protected readonly List<GameObject> Attributes = new List<GameObject>();
+    protected readonly List<GameObject> PermanentAttributes = new List<GameObject>();
+        
     protected DisplayerPositionner Positionner;
 
     protected virtual void Awake()
@@ -61,29 +63,59 @@ public class AttributeDisplayer : MonoBehaviour
         SetText(DefaultAttribute, text, indent, title);
 
         if (permanent)
-            PermanentAttributes.Add(DefaultAttribute);
+            PermanentAttributes.Add(DefaultAttribute.gameObject);
         else
-            Attributes.Add(DefaultAttribute);
+            Attributes.Add(DefaultAttribute.gameObject);
 
         return DefaultAttribute;
     }
 
-    protected List<Text> CreateBlocks(int number, bool permanent = false)
+    private List<BlockAttribute> CreateBlocks(List<BlockAttribute> blocks, bool permanent)
     {
-        var blocks = new List<Text>();
+        var Createdblocks = new List<BlockAttribute>();
+        var positions = Positionner.CreateColumns(blocks.Count, RollBackEnabled: !permanent);
 
-        foreach (Vector3 position in Positionner.CreateColumns(number, !permanent))
+        for (int i = 0; i < blocks.Count; i++)
         {
-            Text block = Instantiate(BlockAttributePrefab, transform);
-            block.rectTransform.localPosition = position;
-            blocks.Add(block);
+            BlockAttribute block = Instantiate(blocks[i], transform);
+            block.transform.localPosition = positions[i];
+            Createdblocks.Add(block);
             if (permanent)
-                PermanentAttributes.Add(block);
+                PermanentAttributes.Add(block.gameObject);
             else
-                Attributes.Add(block);
+                Attributes.Add(block.gameObject);
         }
 
-        return blocks;
+        return Createdblocks;
+    }
+
+    protected List<BlockAttribute> CreateBlocks(int number, bool permanent = false)
+    {
+        List<BlockAttribute> blocks = new List<BlockAttribute>();
+
+        for (int i = 0; i < number; i++)
+            blocks.Add(BlockAttributePrefab);
+
+        return CreateBlocks(blocks, permanent);
+    }
+
+    protected List<BlockAttribute> CreateResourceList(List<string> resourceIDs, bool permanent = false)
+    {
+        List<BlockAttribute> blocks = new List<BlockAttribute>();
+
+        foreach (var resource in resourceIDs)
+            blocks.Add(ResourceList.GetResourceBlock(resource));
+
+        return CreateBlocks(blocks, permanent);
+    }
+    protected List<BlockAttribute> CreateResourceList(List<IResource> resources, bool permanent = false)
+    {
+        List<BlockAttribute> blocks = new List<BlockAttribute>();
+
+        foreach (var resource in resources)
+            blocks.Add(ResourceList.GetResourceBlock(resource));
+
+        return CreateBlocks(blocks, permanent);
     }
 
     protected void SetText(Text Attribute, string text, int indent = 0, string title = null)
@@ -95,10 +127,19 @@ public class AttributeDisplayer : MonoBehaviour
 
         Attribute.text += text;
     }
+    protected void SetBlockText(BlockAttribute block, string text, string title = null)
+    {
+        block.Text.text = "";
+
+        if (title != null)
+            block.Text.text = title + "\n";
+
+        block.Text.text += text;
+    }
     protected void ResetAttributes()
     {
-        foreach (Text text in Attributes)
-            Destroy(text.gameObject);
+        foreach (GameObject gameObject in Attributes)
+            Destroy(gameObject);
 
         Attributes.Clear();
     }

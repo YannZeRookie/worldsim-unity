@@ -10,12 +10,20 @@ public class CellInfosDisplayer : AttributeDisplayer
     [SerializeField]
     Text Efficiency;
 
-    readonly Dictionary<IResource, Text> Resources = new Dictionary<IResource, Text>();
+    readonly Dictionary<IResource, BlockAttribute> Resources = new Dictionary<IResource, BlockAttribute>();
 
     public void Initialize(IWorld world)
     {
-        foreach (KeyValuePair<string, IResource> pair in world.Resources)
-            Resources.Add(pair.Value, CreateAttribute("", title: pair.Value.Name, permanent: true));
+        var worldResources = new List<IResource>();
+        foreach (var pair in world.Resources)
+            worldResources.Add(pair.Value);
+
+        var resourceBlocks = CreateResourceList(worldResources, permanent: true);
+
+        for (int i = 0; i < worldResources.Count; i++)
+            Resources.Add(worldResources[i], resourceBlocks[i]);
+
+        SetCell(null);
     }
 
     public void SetCell(ICell cell)
@@ -30,7 +38,7 @@ public class CellInfosDisplayer : AttributeDisplayer
                 SetText(Efficiency, "N/A", title: "Efficiency");
 
             foreach (var pair in Resources)
-                SetText(pair.Value, cell.GetStock(pair.Key.Id).ToString(), title: pair.Key.Name);
+                SetBlockText(pair.Value, cell.GetStock(pair.Key.Id).ToString(), title: pair.Key.Name);
 
             DisplayJM2SpecificInfos(cell.Jm2);
         }
@@ -40,7 +48,7 @@ public class CellInfosDisplayer : AttributeDisplayer
             SetText(Efficiency, "", title: "Efficiency");
 
             foreach (var pair in Resources)
-                SetText(pair.Value, "", title: pair.Key.Name);
+                SetBlockText(pair.Value, "", title: pair.Key.Name);
 
             ResetAttributes();
         }
@@ -80,28 +88,26 @@ public class CellInfosDisplayer : AttributeDisplayer
         var output = (DataDictionary)values["output"];
         var opex = (DataDictionary)values["opex"];
 
+        var resourcesOutput = new List<string>();
+        var resourcesOpex = new List<string>();
+
+        foreach (var pair in output)
+            resourcesOutput.Add(pair.Key);
+        foreach (var pair in opex)
+            resourcesOpex.Add(pair.Key);
+
         CreateAttribute("", title: "Production");
-        {
-            var blocks = CreateBlocks(opex.Count);
+        var blocksOpex = CreateResourceList(resourcesOpex);
 
-            int index = 0;
-            foreach (var pair in opex)
-            {
-                blocks[index++].text = pair.Key + "\n" + pair.Value.FloatValue();
-            }
-        }
-        
+        for (int i = 0; i < blocksOpex.Count; i++)
+            blocksOpex[i].Text.text = resourcesOpex[i] + "\n" + opex[resourcesOpex[i]].FloatValue();
 
-        CreateBlocks(1)[0].text = "||\n\\/";
 
-        {
-            var blocks = CreateBlocks(output.Count);
+        CreateBlocks(1)[0].Text.text = "||\n\\/";
 
-            int index = 0;
-            foreach (var pair in output)
-            {
-                blocks[index++].text = pair.Key + "\n" + pair.Value.FloatValue();
-            }
-        }
+        var blocksOutput = CreateResourceList(resourcesOutput);
+
+        for (int i = 0; i < blocksOutput.Count; i++)
+            blocksOutput[i].Text.text = resourcesOutput[i] + "\n" + output[resourcesOutput[i]].FloatValue();
     }
 }
