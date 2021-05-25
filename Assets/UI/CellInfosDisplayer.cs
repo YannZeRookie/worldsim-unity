@@ -100,7 +100,7 @@ public class CellInfosDisplayer : AttributeDisplayer
         var blocksOpex = CreateResourceList(resourcesOpex);
 
         for (int i = 0; i < blocksOpex.Count; i++)
-            blocksOpex[i].Text.text = resourcesOpex[i] + "\n" + opex[resourcesOpex[i]].FloatValue();
+            blocksOpex[i].Text.text = resourcesOpex[i] + "\n" + opex[resourcesOpex[i]].FloatValue;
 
 
         CreateBlocks(1)[0].Text.text = "||\n\\/";
@@ -108,6 +108,6 @@ public class CellInfosDisplayer : AttributeDisplayer
         var blocksOutput = CreateResourceList(resourcesOutput);
 
         for (int i = 0; i < blocksOutput.Count; i++)
-            blocksOutput[i].Text.text = resourcesOutput[i] + "\n" + output[resourcesOutput[i]].FloatValue();
+            blocksOutput[i].Text.text = resourcesOutput[i] + "\n" + output[resourcesOutput[i]].FloatValue;
     }
 }

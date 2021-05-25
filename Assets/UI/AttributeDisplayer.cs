@@ -48,7 +48,7 @@ public class AttributeDisplayer : MonoBehaviour
         }
 
         else if (dataNode is DataValue value)
-            CreateAttribute(value.StringValue(), indent, title);
+            CreateAttribute(value.StringValue, indent, title);
         else
             Debug.LogError("Unknown type : " + dataNode.GetType());
     }
