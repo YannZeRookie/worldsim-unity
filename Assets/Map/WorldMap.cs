@@ -7,7 +7,8 @@ using WorldSim.API;
 //Make the link between a Tilemap and an IWorld map
 public class WorldMap : MonoBehaviour
 {
-    public UIManager UIManager;
+    public UIManager UIManager { get; private set; }
+    public SelectionManager SelectionManager { get; private set; }
 
     IWorld World;
     // Start is called before the first frame update
@@ -23,6 +24,7 @@ public class WorldMap : MonoBehaviour
         CellConverter = GetComponent<CellConverter>();
         Tilemap = GetComponentInChildren<Tilemap>();
         UIManager = FindObjectOfType<UIManager>();
+        SelectionManager = GetComponent<SelectionManager>();
 
         UIManager.Initialize(this, World);
 

@@ -13,14 +13,16 @@ public class CellDisplayer : MonoBehaviour
     public string ID;
 
     Tilemap Tilemap;
-    ICell Cell;
+    public ICell Cell { get; private set; }
     UIManager UIManager;
+    SelectionManager SelectionManager;
 
     public void Initialize(WorldMap worldMap, ICell Cell)
     {
         this.Cell = Cell;
         Tilemap = worldMap.Tilemap;
         UIManager = worldMap.UIManager;
+        SelectionManager = worldMap.SelectionManager;
 
         //Position
         Vector3Int gridPostition = new Vector3Int(Cell.X, Cell.Y, 0);
@@ -39,11 +41,16 @@ public class CellDisplayer : MonoBehaviour
 
     private void OnMouseEnter()
     {
-        UIManager.CellInfosDisplayer.SetCell(Cell);
+        SelectionManager.Hover(this);
     }
 
     private void OnMouseExit()
     {
-        //UIManager.CellInfosDisplayer.SetCell(null);
+        SelectionManager.HoverStop(this);
+    }
+
+    private void OnMouseUpAsButton()
+    {
+        SelectionManager.Select(this);
     }
 }
